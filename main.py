@@ -26,12 +26,24 @@ def send_request(url, headers, rest, i):
 
 
 def main():
-    url = input('请输入请求地址：')
-    num_requests = int(input('请输入请求次数：'))
-    headers = {"User-Agent": input('请输入UA：')}
-    rest = input('每次请求之后休息多久(单位：秒)(仅支持整数)：')
+    url = input('请求地址：')
+    num_requests = int(input('请求次数：'))
+    ua = input('UA(不输入我就用默认的):')
+    rest = input('请求间隔(单位：秒)(仅支持整数)：')
     workers = int(input('要多少线程(嘿嘿)：'))
     print('\n')
+
+# 默认值(好屎山啊)
+    if not ua:
+        ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
+    if not num_requests:
+        num_requests = 10
+    if not rest:
+        rest = 3
+    if not workers:
+        workers = 1
+
+    headers = {"User-Agent": ua}
 
     # 使用 ThreadPoolExecutor 进行多线程请求
     with ThreadPoolExecutor(max_workers=workers) as executor:  # max_workers 可以根据需求调整
