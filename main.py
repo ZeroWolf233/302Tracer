@@ -56,4 +56,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    input("按任意键退出...")
+    input()
