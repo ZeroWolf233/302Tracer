@@ -33,7 +33,7 @@ def main():
     workers = int(input('要多少线程(嘿嘿)：'))
     print('\n')
 
-# 默认值(好屎山啊)
+    # 默认值(好屎山啊)
     if not ua:
         ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0"
     if not num_requests:
