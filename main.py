@@ -56,4 +56,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    input()
+    input('运行完成,请查看上方的结果')
