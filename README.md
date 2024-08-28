@@ -6,7 +6,7 @@
 
 # 下载
  - [Release](https://github.com/ZeroWolf233/302Tracer/releases)
-- [我的Alist](http://zerowolf.top:5244/阿里云/302Tracer)
+- [我的Alist](http://zerowolf.top:5244/阿里云/code/302Tracer)
 
 # TODO
 - 做点防傻子设计
