@@ -1,6 +1,7 @@
 import requests
 import time
 from concurrent.futures import ThreadPoolExecutor
+import gc
 
 # 定义请求函数
 def send_request(url, headers, rest, i):
@@ -21,6 +22,11 @@ def send_request(url, headers, rest, i):
 
     except requests.exceptions.RequestException as e:
         print(f"请求 {i + 1} 失败，发生异常: {e}\n\n"+"-"*100+"\n")
+
+    finally:
+        # 手动删除不再需要的对象
+        del response
+        gc.collect()  # 强制执行垃圾回收
 
     # 每次请求后休息指定时间
     time.sleep(int(rest))
