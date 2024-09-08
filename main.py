@@ -17,16 +17,18 @@ def send_request(url, headers, rest, i):
         # 检查请求是否成功
         if response.status_code == 200:
             print(f"\n请求 {i + 1} 成功，最终服务器地址: {response.url}\n\n"+"-"*100+"\n")
+            del response
+            gc.collect()
+
         else:
             print(f"请求 {i + 1} 失败，状态码: {response.status_code}\n\n"+"-"*100+"\n")
+            del response
+            gc.collect()
 
     except requests.exceptions.RequestException as e:
         print(f"请求 {i + 1} 失败，发生异常: {e}\n\n"+"-"*100+"\n")
-
-    finally:
-        # 手动删除不再需要的对象
         del response
-        gc.collect()  # 强制执行垃圾回收
+        gc.collect()
 
     # 每次请求后休息指定时间
     time.sleep(int(rest))
