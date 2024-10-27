@@ -32,7 +32,7 @@ def get_valid_int_input(prompt, default):
         try:
             return int(user_input)
         except ValueError:
-            print("无效的输入，请输入整数。\n")
+            print("杂鱼杂鱼~是无效的输入呢~\n")
 
 def main():
     url = input('请求地址：')
