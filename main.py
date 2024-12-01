@@ -6,6 +6,7 @@ import gc
 # 定义请求函数
 def send_request(url, headers, rest, i):
     try:
+        timeStart = time.time()
         response = requests.get(url, headers=headers, timeout=10)  # 增加超时设置，防止请求长时间挂起
 
         # 检查是否有重定向
@@ -16,17 +17,25 @@ def send_request(url, headers, rest, i):
 
         # 检查请求是否成功
         if response.status_code == 200:
-            print(f"\n请求 {i + 1} 成功，最终服务器地址: {response.url}\n\n"+"-"*100+"\n")
+            print(f"\n请求 {i + 1} 成功, 最终地址: {response.url}\n")
+
+            timeEnd = time.time()
+            timeDiff = timeEnd - timeStart
+            fileSize = int(response.headers.get('Content-Length')) / 1024 / 1024
+            speed = fileSize / timeDiff
+
+            print(f"用时 {round(timeDiff, 2)} 秒, 文件大小: {round(fileSize, 2)} MB, 速度 {round(speed, 2)}MB/s\n\n"+"-"*100+"\n")
+
             del response
             gc.collect()
 
         else:
-            print(f"请求 {i + 1} 失败，状态码: {response.status_code}\n\n"+"-"*100+"\n")
+            print(f"请求 {i + 1} 失败, 状态码: {response.status_code}\n\n"+"-"*100+"\n")
             del response
             gc.collect()
 
     except requests.exceptions.RequestException as e:
-        print(f"请求 {i + 1} 失败，发生异常: {e}\n\n"+"-"*100+"\n")
+        print(f"请求 {i + 1} 失败, 发生异常: {e}\n\n"+"-"*100+"\n")
         del response
         gc.collect()
 
@@ -41,7 +50,7 @@ def get_valid_int_input(prompt, default):
         try:
             return int(user_input)
         except ValueError:
-            print("杂鱼杂鱼，是无效的输入呢~\n")
+            print("杂鱼杂鱼, 是无效的输入呢~\n")
 
 def main():
     url = input('请求地址：')
